@@ -3,224 +3,450 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home · Kitek Dynamics</title>
-<meta name="description" content="Kitek Dynamics - Active Drive & Precise Control for AI liquid cooling and beyond.">
+<title>Kitek Dynamics Co., Ltd.</title>
+<meta name="description" content="Kitek Dynamics designs and manufactures active fluid drive and control components — pumps, valves, and motors — for AI liquid cooling and industrial systems.">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/img/favicon.png">
-  <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<style>
+  :root {
+    --ink: #1a1e24; --ink-muted: #5a6270; --rule: #d8dde4;
+    --bg: #f7f8fa; --white: #ffffff;
+    --accent: #1a5fa8; --accent-dark: #0e3f72; --accent-light: #e8f0fb;
+    --mono: 'Courier New', monospace; --sans: Arial, Helvetica, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); color: var(--ink); background: var(--white); font-size: 15px; line-height: 1.65; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100; background: var(--white);
+    border-bottom: 1px solid var(--rule); display: flex; align-items: center;
+    justify-content: space-between; padding: 0 48px; height: 60px;
+  }
+  .nav-logo { font-size: 17px; font-weight: 700; letter-spacing: 0.04em; color: var(--ink); text-decoration: none; cursor: pointer; }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--ink-muted); font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.15s; cursor: pointer; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .lang-toggle { display: flex; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; margin-left: 24px; }
+  .lang-toggle button { padding: 4px 10px; font-size: 12px; font-family: var(--sans); border: none; background: var(--white); color: var(--ink-muted); cursor: pointer; transition: all 0.15s; }
+  .lang-toggle button.active { background: var(--accent); color: var(--white); }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .hero { background: var(--ink); color: var(--white); padding: 96px 48px 80px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 480px; height: 480px; background: radial-gradient(circle, rgba(26,95,168,0.35) 0%, transparent 70%); pointer-events: none; }
+  .hero-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); text-transform: uppercase; margin-bottom: 20px; }
+  .hero-headline { font-size: clamp(32px, 5vw, 54px); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; max-width: 640px; margin-bottom: 20px; }
+  .hero-headline em { font-style: normal; color: #6daef0; }
+  .hero-sub { font-size: 16px; color: rgba(255,255,255,0.65); max-width: 520px; margin-bottom: 40px; line-height: 1.7; }
+  .hero-cta { display: inline-block; padding: 12px 28px; background: var(--accent); color: var(--white); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 3px; transition: background 0.15s; cursor: pointer; border: none; font-family: var(--sans); }
+  .hero-cta:hover { background: var(--accent-dark); }
+  .product-pills { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 56px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .pill { padding: 6px 16px; border: 1px solid rgba(255,255,255,0.2); border-radius: 2px; font-size: 12px; letter-spacing: 0.06em; color: rgba(255,255,255,0.6); font-family: var(--mono); }
+
+  .section { padding: 72px 48px; max-width: 1100px; margin: 0 auto; }
+  .section-full { padding: 72px 48px; }
+  .section-alt { background: var(--bg); }
+  .section-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+  .section-title { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 16px; }
+  .section-body { color: var(--ink-muted); max-width: 640px; line-height: 1.75; }
+
+  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 48px; }
+  .product-card { background: var(--white); padding: 32px 28px; }
+  .product-card-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .product-card-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .product-card-body { font-size: 13px; color: var(--ink-muted); line-height: 1.65; }
+
+  /* page header dark bar */
+  .page-header { background: var(--ink); padding: 64px 48px 48px; }
+
+  /* about */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 48px; align-items: start; }
+  .about-block { margin-bottom: 32px; }
+  .about-block h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+  .about-block p { font-size: 14px; color: var(--ink-muted); line-height: 1.75; }
+
+  /* PRODUCT SLIDESHOW */
+  .prod-category { border-bottom: 1px solid var(--rule); padding: 56px 48px; max-width: 1100px; margin: 0 auto; }
+  .prod-category:last-child { border-bottom: none; }
+  .prod-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 8px; }
+  .prod-title { font-size: 22px; font-weight: 700; }
+  .prod-desc { color: var(--ink-muted); font-size: 14px; max-width: 680px; margin-bottom: 28px; line-height: 1.7; }
+
+  .slideshow { position: relative; }
+  .slide-img-wrap { position: relative; background: var(--bg); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+  .slide-img-wrap img { width: 100%; height: auto; display: block; }
+  .slide-label { text-align: center; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--ink-muted); margin-top: 12px; }
+  .slide-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 16px; }
+  .slide-btn { background: none; border: 1px solid var(--rule); border-radius: 3px; padding: 6px 14px; font-size: 18px; cursor: pointer; color: var(--ink-muted); transition: all 0.15s; font-family: var(--sans); }
+  .slide-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .slide-btn:disabled { opacity: 0.3; cursor: default; }
+  .slide-counter { font-family: var(--mono); font-size: 12px; color: var(--ink-muted); letter-spacing: 0.06em; }
+  .slide-dots { display: flex; gap: 6px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rule); cursor: pointer; transition: background 0.15s; border: none; padding: 0; }
+  .dot.active { background: var(--accent); }
+
+  /* contact */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 48px; align-items: start; }
+  .contact-info h3 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 8px; margin-top: 28px; }
+  .contact-info h3:first-child { margin-top: 0; }
+  .contact-info p, .contact-info a { font-size: 15px; color: var(--ink); text-decoration: none; line-height: 1.7; }
+  .contact-info a:hover { color: var(--accent); }
+  .nda-note { margin-top: 28px; padding: 16px 20px; background: var(--accent-light); border-left: 3px solid var(--accent); font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+  .contact-form label { display: block; font-size: 12px; font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px; margin-top: 20px; }
+  .contact-form label:first-child { margin-top: 0; }
+  .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--rule); border-radius: 3px; font-size: 14px; font-family: var(--sans); color: var(--ink); background: var(--white); outline: none; transition: border-color 0.15s; }
+  .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--accent); }
+  .contact-form textarea { height: 120px; resize: vertical; }
+  .contact-form button { margin-top: 20px; width: 100%; padding: 12px; background: var(--accent); color: var(--white); border: none; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-family: var(--sans); border-radius: 3px; cursor: pointer; transition: background 0.15s; }
+  .contact-form button:hover { background: var(--accent-dark); }
+
+  footer { background: var(--ink); color: rgba(255,255,255,0.4); padding: 32px 48px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+  footer span { color: rgba(255,255,255,0.7); }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 16px; }
+    .nav-links { gap: 16px; }
+    .hero, .section, .section-full, .prod-category, .page-header { padding-left: 20px; padding-right: 20px; }
+    .product-grid { grid-template-columns: 1fr; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
 </head>
-<body class="lang-en">
+<body>
 
-<header class="site-header">
-  <div class="container nav-row">
-    <a href="index.html" class="brand">
-      <img src="assets/img/logo-full.png" alt="Kitek Dynamics" class="brand-logo">
-    </a>
-    <nav class="nav-links">
-      <a href="index.html" class="active"><span class="lang-en">Home</span><span class="lang-zh">首頁</span></a>
-      <a href="about.html" class=""><span class="lang-en">About</span><span class="lang-zh">關於我們</span></a>
-      <a href="products.html" class=""><span class="lang-en">Products</span><span class="lang-zh">產品</span></a>
-      <a href="technology.html" class=""><span class="lang-en">Technology</span><span class="lang-zh">技術</span></a>
-      <a href="manufacturing.html" class=""><span class="lang-en">Manufacturing</span><span class="lang-zh">製造</span></a>
-      <a href="contact.html" class=""><span class="lang-en">Contact</span><span class="lang-zh">聯絡我們</span></a>
-    </nav>
-    <div style="display:flex;align-items:center;">
-      <div class="lang-switch">
-        <button data-lang="en">EN</button>
-        <button data-lang="zh">中文</button>
+<nav>
+  <div class="nav-logo" onclick="showPage('home')"><img src="assets/img/logo-color-horizontal.png" alt="Kitek Dynamics" style="height:34px;display:block;"></div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home">Home</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a onclick="showPage('products')" id="nav-products">Products</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+    <li>
+      <div class="lang-toggle">
+        <button class="active" onclick="setLang('en')" id="btn-en">EN</button>
+        <button onclick="setLang('zh')" id="btn-zh">中文</button>
       </div>
-      <button class="nav-toggle" aria-label="menu">&#9776;</button>
+    </li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-label" data-en="Taiwan · Founded 2026" data-zh="台灣 · 2026年成立"></div>
+    <h1 class="hero-headline" data-en="Active Drive &amp;<br><em>Precise Control</em>" data-zh="主動驅動，<br><em>精確控制</em>"></h1>
+    <p class="hero-sub"
+       data-en="Kitek Dynamics designs and manufactures active fluid drive and control components — pumps, valves, and motors — for AI liquid cooling and industrial systems."
+       data-zh="Kitek Dynamics 設計並製造主動流體驅動與控制元件，包含泵浦、閥件與馬達，應用於 AI 伺服器液冷及工業系統。"></p>
+    <button class="hero-cta" onclick="showPage('contact')" data-en="Contact Us" data-zh="聯絡我們"></button>
+    <div class="product-pills">
+      <div class="pill" data-en="Pump" data-zh="泵浦"></div>
+      <div class="pill" data-en="Motorized Valve" data-zh="電動閥"></div>
+      <div class="pill" data-en="Solenoid Valve" data-zh="電磁閥"></div>
+      <div class="pill" data-en="Flow Meter" data-zh="流量計"></div>
+      <div class="pill" data-en="Motor" data-zh="馬達"></div>
     </div>
   </div>
-</header>
-
-
-<section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow lang-en">AVC Group Company</div>
-        <div class="eyebrow lang-zh">AVC 集團成員企業</div>
-        <h1 class="lang-en">Active Drive &amp; <span class="accent">Precise Control</span> for Liquid Cooling</h1>
-        <h1 class="lang-zh">主動式驅動與<span class="accent">精準控制</span> — 打造液冷系統核心動力</h1>
-        <p class="tagline lang-en">Kitek Dynamics engineers motors, pumps and motorized valves that power next-generation AI liquid cooling — and a growing range of applications beyond it.</p>
-        <p class="tagline lang-zh">Kitek Dynamics 專注開發馬達、泵浦與電動閥,驅動新世代 AI 液冷系統,並持續拓展至更多應用領域。</p>
-        <div class="hero-cta">
-          <a href="products.html" class="btn btn-primary"><span class="lang-en">Explore Products</span><span class="lang-zh">探索產品</span></a>
-          <a href="contact.html" class="btn btn-ghost"><span class="lang-en">Contact Us</span><span class="lang-zh">聯絡我們</span></a>
+  <div class="section-full section-alt">
+    <div class="section" style="padding-top:0;padding-bottom:0;">
+      <div class="section-label" data-en="What We Do" data-zh="我們的業務"></div>
+      <h2 class="section-title" data-en="Active fluid drive &amp; control components" data-zh="主動流體驅動與控制元件"></h2>
+      <p class="section-body"
+         data-en="We develop motor-driven components that regulate fluid movement in demanding environments. Our products are designed for long service life, mass production, and seamless integration into liquid cooling systems and beyond."
+         data-zh="我們開發以馬達驅動的元件，用於高要求環境下的流體調控。產品設計以長壽命、可量產、易整合為核心，適用於液冷系統及其他多元應用。"></p>
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-card-tag" data-en="01 — Fluid Drive" data-zh="01 — 流體驅動"></div>
+          <div class="product-card-title" data-en="Pump" data-zh="泵浦"></div>
+          <div class="product-card-body" data-en="Canned motor pumps from micro to 8U scale. Sealless construction for extended service life in CDU and close-loop liquid cooling applications." data-zh="無軸封罐封馬達泵浦，涵蓋 Micro 至 8U 規格，適用於 CDU 機架式及列式液冷應用。"></div>
         </div>
-        <div class="stat-row">
-          <div><div class="num">2026</div><div class="lbl lang-en">Founded · AVC Group Subsidiary</div><div class="lbl lang-zh">成立年份．AVC 集團子公司</div></div>
-          <div><div class="num">3</div><div class="lbl lang-en">Core Lines: Motor · Valve · Pump</div><div class="lbl lang-zh">核心產品線:馬達．閥．泵浦</div></div>
-          <div><div class="num">5+</div><div class="lbl lang-en">Target Application Markets</div><div class="lbl lang-zh">目標應用市場</div></div>
+        <div class="product-card">
+          <div class="product-card-tag" data-en="02 — Flow Control" data-zh="02 — 流量控制"></div>
+          <div class="product-card-title" data-en="Valve" data-zh="閥件"></div>
+          <div class="product-card-body" data-en="Motorized valves for precision proportional flow regulation. Solenoid valves for rapid isolation. Designed for AI server liquid cooling manifolds." data-zh="電動閥提供精確比例流量調節；電磁閥實現快速隔離。針對 AI 伺服器液冷集管設計。"></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-tag" data-en="03 — Drive Source" data-zh="03 — 動力源"></div>
+          <div class="product-card-title" data-en="Motor" data-zh="馬達"></div>
+          <div class="product-card-body" data-en="BLDC, stepper, and lead screw motors. The drive source behind our pumps and valves, also supplied independently for industrial and automation applications." data-zh="BLDC、步進及導螺桿馬達，為泵浦與閥件的核心動力，亦可獨立供應工業與自動化應用。"></div>
         </div>
       </div>
-      <div class="hero-figure"><img src="assets/img/pump-products.png" alt="Kitek pump products"></div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="section section-alt">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow lang-en">Company Overview</div>
-      <div class="eyebrow lang-zh">公司概覽</div>
-      <h2 class="lang-en">Engineering the active fluid components behind reliable liquid cooling</h2>
-      <h2 class="lang-zh">打造可靠液冷系統背後的主動式流體元件</h2>
-      <p class="lede lang-en">Founded in 2026 as a subsidiary of the AVC Group, Kitek inherits AVC's rotating-machinery design heritage and focuses on motor-driven active control components — filling the group's gap in active fluid drive &amp; control.</p>
-      <p class="lede lang-zh">Kitek 於 2026 年成立,為 AVC 集團旗下子公司,傳承 AVC 風扇事業部的旋轉機械設計實力,專注開發馬達驅動的主動控制元件,補足集團在主動式流體驅動與控制領域的版圖。</p>
-    </div>
-    <div class="grid grid-3">
-      <div class="card">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V9l6-4v4l6-4v16"/><path d="M4 21h16M8 13h.01M8 17h.01M14 13h.01M14 17h.01"/></svg></div>
-        <h3>AVC</h3>
-        <p class="lang-en">Fans, cold plates, CDU &amp; full-rack integration.</p>
-        <p class="lang-zh">風扇、冷板、CDU 與全機櫃整合。</p>
-      </div>
-      <div class="card">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4M17 12h4M7 12a5 5 0 0 1 10 0"/><circle cx="12" cy="12" r="2"/><path d="M12 7V4M9 4h6"/></svg></div>
-        <h3>Fositek</h3>
-        <p class="lang-en">Quick disconnects — UQD / QDC passive connectors.</p>
-        <p class="lang-zh">快接頭 UQD／QDC(被動式連接器)。</p>
-      </div>
-      <div class="card" style="border-color:var(--teal-400);box-shadow:0 8px 24px rgba(18,184,196,0.16);">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 6.6l1.9 1.8M17.5 15.6l1.9 1.8M2.5 12h2.6M18.9 12h2.6M4.6 17.4l1.9-1.8M17.5 8.4l1.9-1.8"/></svg></div>
-        <h3>Kitek</h3>
-        <p class="lang-en">Motors, pumps, motorized &amp; solenoid valves, flow meters — active fluid control.</p>
-        <p class="lang-zh">馬達、泵浦、電動閥與電磁閥、流量計 — 主動式流體控制。</p>
-      </div>
-    </div>
-    <p class="mt-24"><a href="about.html" class="btn btn-navy"><span class="lang-en">Learn more about our group role</span><span class="lang-zh">深入了解集團分工</span></a></p>
+<!-- ABOUT -->
+<div class="page" id="page-about">
+  <div class="page-header">
+    <div class="hero-label" data-en="About Kitek" data-zh="關於 Kitek"></div>
+    <h1 class="hero-headline" data-en="Who We Are" data-zh="公司簡介"></h1>
   </div>
-</section>
-
-<section class="section section-navy">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">CORE BUSINESS FOCUS</div>
-      <h2 class="lang-en">Five component lines, one active fluid platform</h2>
-      <h2 class="lang-zh">五大產品線,構築完整主動式流體平台</h2>
-    </div>
-    <div class="grid grid-4">
-      <a href="products.html#motor" class="card" style="text-decoration:none;">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 6.6l1.9 1.8M17.5 15.6l1.9 1.8M2.5 12h2.6M18.9 12h2.6M4.6 17.4l1.9-1.8M17.5 8.4l1.9-1.8"/></svg></div>
-        <h3 class="lang-en">Motor</h3><h3 class="lang-zh">馬達</h3>
-        <p class="lang-en">Power source for all active components.</p>
-        <p class="lang-zh">所有主動元件的動力來源。</p>
-      </a>
-      <a href="products.html#mvalve" class="card" style="text-decoration:none;">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4M17 12h4M7 12a5 5 0 0 1 10 0"/><circle cx="12" cy="12" r="2"/><path d="M12 7V4M9 4h6"/></svg></div>
-        <h3 class="lang-en">Motorized Valve</h3><h3 class="lang-zh">電動閥</h3>
-        <p class="lang-en">Flow / path control, including balancing.</p>
-        <p class="lang-zh">流量／路徑控制(含平衡調節)。</p>
-      </a>
-      <a href="products.html#svalve" class="card" style="text-decoration:none;">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></div>
-        <h3 class="lang-en">Solenoid Valve</h3><h3 class="lang-zh">電磁閥</h3>
-        <p class="lang-en">On-off control; fast fault isolation.</p>
-        <p class="lang-zh">開關控制;快速故障隔離。</p>
-      </a>
-      <a href="products.html#pump" class="card" style="text-decoration:none;">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3s6 7.2 6 11.2A6 6 0 0 1 6 14.2C6 10.2 12 3 12 3Z"/></svg></div>
-        <h3 class="lang-en">Pump</h3><h3 class="lang-zh">泵浦</h3>
-        <p class="lang-en">Drives coolant circulation — flow &amp; head.</p>
-        <p class="lang-zh">驅動冷卻液循環,提供流量與揚程。</p>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt">
-  <div class="container">
-    <div class="split">
+  <div class="section">
+    <div class="about-grid">
       <div>
-        <div class="eyebrow lang-en">Why Kitek</div>
-        <div class="eyebrow lang-zh">為什麼選擇 Kitek</div>
-        <h3 class="lang-en">Technology autonomy, built for the whole loop</h3>
-        <h3 class="lang-zh">技術自主,為整條迴路而生</h3>
-        <ul class="check">
-          <li class="lang-en">Technology autonomy &amp; supply security — we own the key technology behind high-barrier active drive &amp; control components.</li>
-          <li class="lang-zh">技術自主與供應保障 — 內化高技術門檻的主動驅動與控制元件,掌握關鍵技術。</li>
-          <li class="lang-en">Cross-market value — reliable, mass-producible, integrable components for diverse applications.</li>
-          <li class="lang-zh">跨市場價值 — 提供可靠、可量產、易整合的元件,滿足多元應用需求。</li>
-          <li class="lang-en">Backed by AVC Group's system-level view across fans, cold plates, CDU and manifolds.</li>
-          <li class="lang-zh">背靠 AVC 集團在風扇、冷板、CDU 與集管上的系統級視野。</li>
-          <li class="lang-en">From AI liquid cooling today to agricultural drones, livestock HVAC and robotic joints tomorrow.</li>
-          <li class="lang-zh">從今日的 AI 液冷,延伸至農業無人機、畜牧空調與機器人關節等更多市場。</li>
-        </ul>
-      </div>
-      <div class="split-media"><img src="assets/img/liquid-cooling-loop.png" alt="Liquid cooling loop"></div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-tight" style="padding-bottom:40px;">
-  <div class="container">
-    <div class="section-head" style="margin-bottom:28px;">
-      <div class="eyebrow lang-en">Target Markets</div>
-      <div class="eyebrow lang-zh">目標市場</div>
-      <h2 class="lang-en">One core technology, many applications</h2>
-      <h2 class="lang-zh">同一項核心技術,延伸多元應用</h2>
-    </div>
-    <div class="pill-strip">
-      <div class="pill"><span class="dot-ico"></span><span class="lang-en">AI Liquid Cooling</span><span class="lang-zh">AI 液冷散熱</span></div>
-      <div class="pill"><span class="dot-ico"></span><span class="lang-en">Agricultural Drones</span><span class="lang-zh">農用無人機</span></div>
-      <div class="pill"><span class="dot-ico"></span><span class="lang-en">Livestock HVAC</span><span class="lang-zh">畜牧空調</span></div>
-      <div class="pill"><span class="dot-ico"></span><span class="lang-en">Robotic Joints</span><span class="lang-zh">機器人關節</span></div>
-      <div class="pill"><span class="dot-ico"></span><span class="lang-en">&amp; More</span><span class="lang-zh">及更多市場</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-navy" style="padding:64px 0;">
-  <div class="container center">
-    <h2 class="lang-en" style="font-size:28px;">Looking for a reliable active fluid control partner?</h2>
-    <h2 class="lang-zh" style="font-size:28px;">正在尋找可靠的主動式流體控制夥伴?</h2>
-    <p class="mt-16 lang-en" style="color:var(--steel-400);">Talk to our team about pumps, motors, valves and system-level co-design.</p>
-    <p class="mt-16 lang-zh" style="color:var(--steel-400);">歡迎與我們的團隊討論泵浦、馬達、閥件與系統級共同設計。</p>
-    <p class="mt-24"><a href="contact.html" class="btn btn-primary"><span class="lang-en">Contact Us</span><span class="lang-zh">聯絡我們</span></a></p>
-  </div>
-</section>
-
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand"><img src="assets/img/logo-full.png" alt="Kitek Dynamics" class="brand-logo"></div>
-        <p class="lang-en">Kitek Dynamics Co., Ltd. is an AVC Group company engineering motors, pumps and motorized valves for active fluid drive &amp; control — from AI liquid cooling to a wide range of industrial applications.</p>
-        <p class="lang-zh">Kitek Dynamics 為 AVC 集團旗下公司,專注開發馬達、泵浦與電動閥等主動式流體驅動與控制元件 — 應用範圍從 AI 液冷延伸至多元工業領域。</p>
+        <div class="section-label" data-en="Company" data-zh="公司資訊"></div>
+        <div class="about-block">
+          <h3 data-en="Kitek Dynamics Co., Ltd." data-zh="奇達動力股份有限公司"></h3>
+          <p data-en="Founded in 2026 and headquartered in New Taipei City, Taiwan. Kitek Dynamics specializes in the design, development, and manufacture of active fluid drive and control components." data-zh="2026年成立，總部位於台灣新北市。奇達動力專注於主動流體驅動與控制元件的設計、開發及製造。"></p>
+        </div>
+        <div class="about-block">
+          <h3 data-en="What We Do" data-zh="核心業務"></h3>
+          <p data-en="We design and manufacture pumps, motorized valves, solenoid valves, flow meters, and motors. Our primary market is AI server liquid cooling; our technology extends to industrial automation and other precision fluid control applications." data-zh="設計製造泵浦、電動閥、電磁閥、流量計與馬達。主要市場為 AI 伺服器液冷，技術同步延伸至工業自動化及其他精密流體控制應用。"></p>
+        </div>
+        <div class="about-block">
+          <h3 data-en="Our Approach" data-zh="技術理念"></h3>
+          <p data-en="Design decisions are driven by simulation before hardware build. We maintain in-house capability in electromagnetic, thermal, structural, and hydrodynamic analysis. Products are validated through in-house reliability and performance testing before mass production." data-zh="設計決策以模擬先行，涵蓋電磁、熱、結構及流體動力分析。產品量產前須通過自有可靠度與性能驗測。"></p>
+        </div>
       </div>
       <div>
-        <h4><span class="lang-en">Company</span><span class="lang-zh">公司</span></h4>
-        <p><a href="about.html"><span class="lang-en">About Kitek</span><span class="lang-zh">關於 Kitek</span></a></p>
-        <p><a href="technology.html"><span class="lang-en">Technology</span><span class="lang-zh">技術實力</span></a></p>
-        <p><a href="manufacturing.html"><span class="lang-en">Manufacturing</span><span class="lang-zh">製造與驗證</span></a></p>
-        <p><a href="contact.html"><span class="lang-en">Contact</span><span class="lang-zh">聯絡我們</span></a></p>
+        <div class="section-label" data-en="Target Markets" data-zh="目標市場"></div>
+        <div class="about-block">
+          <h3 data-en="AI Liquid Cooling" data-zh="AI 伺服器液冷"></h3>
+          <p data-en="Pumps, motorized valves, and solenoid valves for CDU in-rack, in-row, and server-level liquid cooling loops. Focused on reliability, fluid compatibility, and system integration." data-zh="泵浦、電動閥與電磁閥應用於 CDU 機架式、列式及伺服器級液冷迴路，重視可靠度、流體相容性與系統整合。"></p>
+        </div>
+        <div class="about-block">
+          <h3 data-en="Industrial &amp; Automation" data-zh="工業與自動化"></h3>
+          <p data-en="Motors and actuators for agricultural drones, robotic joints, conveyor systems, and precision positioning. Leveraging the same core design competencies across markets." data-zh="馬達與致動器應用於農業無人機、機器人關節、輸送系統及精密定位，以相同核心設計能力跨市場延伸。"></p>
+        </div>
       </div>
-      <div>
-        <h4><span class="lang-en">Products</span><span class="lang-zh">產品</span></h4>
-        <p><a href="products.html#motor"><span class="lang-en">Motor</span><span class="lang-zh">馬達</span></a></p>
-        <p><a href="products.html#mvalve"><span class="lang-en">Motorized Valve</span><span class="lang-zh">電動閥</span></a></p>
-        <p><a href="products.html#svalve"><span class="lang-en">Solenoid Valve</span><span class="lang-zh">電磁閥</span></a></p>
-        <p><a href="products.html#pump"><span class="lang-en">Pump</span><span class="lang-zh">泵浦</span></a></p>
-      </div>
-      <div>
-        <h4><span class="lang-en">Contact</span><span class="lang-zh">聯絡資訊</span></h4>
-        <p class="lang-en">Taiwan (HQ) · Vietnam (Manufacturing)</p>
-        <p class="lang-zh">台灣(總部)．越南(製造基地)</p>
-        <p>info@kitek-dynamics.com</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span class="lang-en">&copy; 2026 Kitek Dynamics Co., Ltd. An AVC Group Company. All rights reserved.</span>
-      <span class="lang-zh">&copy; 2026 Kitek Dynamics Co., Ltd. AVC 集團成員企業。保留所有權利。</span>
-      <span class="lang-en">Active Drive &amp; Precise Control</span>
-      <span class="lang-zh">主動式驅動與精準控制</span>
     </div>
   </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="page" id="page-products">
+  <div class="page-header">
+    <div class="hero-label" data-en="Products" data-zh="產品"></div>
+    <h1 class="hero-headline" data-en="Our Product Lines" data-zh="產品線總覽"></h1>
+  </div>
+
+  <div class="prod-category">
+    <div class="prod-header">
+      <div class="prod-title" data-en="Motorized Valve" data-zh="電動閥"></div>
+    </div>
+    <p class="prod-desc"
+       data-en="Stepper motor-driven proportional valve for continuous 0–100% flow modulation. Designed for AI server liquid cooling manifolds requiring dynamic load-following and precision thermal management."
+       data-zh="步進馬達驅動比例閥，支援 0–100% 連續流量調節。針對 AI 伺服器液冷集管設計，滿足動態負載追蹤與精密熱管理需求。"></p>
+    <div class="slideshow" id="ss-valve"></div>
+  </div>
+
+  <div class="prod-category" style="background:var(--bg);">
+    <div class="prod-header">
+      <div class="prod-title" data-en="Pump" data-zh="泵浦"></div>
+    </div>
+    <p class="prod-desc"
+       data-en="Canned motor pump (CMP) series with sealless construction. Eliminates shaft seals to reduce leakage risk and extend service life. Available from micro-scale to large CDU configurations."
+       data-zh="無軸封罐封馬達泵浦（CMP）系列，消除軸封以降低洩漏風險並延長使用壽命。涵蓋 Micro 至大型 CDU 規格。"></p>
+    <div class="slideshow" id="ss-pump"></div>
+  </div>
+
+  <div class="prod-category">
+    <div class="prod-header">
+      <div class="prod-title" data-en="Motor" data-zh="馬達"></div>
+    </div>
+    <p class="prod-desc"
+       data-en="BLDC, stepper, and lead screw motor design and production capability. Serves as the drive source for Kitek pumps and valves; also supplied independently for industrial and automation customers."
+       data-zh="具備 BLDC、步進及導螺桿馬達的設計與量產能力，為 Kitek 泵浦與閥件的動力核心，亦可獨立供應工業及自動化客戶。"></p>
+    <div class="slideshow" id="ss-motor"></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="page-contact">
+  <div class="page-header">
+    <div class="hero-label" data-en="Contact" data-zh="聯絡我們"></div>
+    <h1 class="hero-headline" data-en="Get in Touch" data-zh="歡迎聯絡"></h1>
+  </div>
+  <div class="section">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3 data-en="Company" data-zh="公司名稱"></h3>
+        <p data-en="Kitek Dynamics Co., Ltd." data-zh="奇達動力股份有限公司"></p>
+        <h3 data-en="Address" data-zh="地址"></h3>
+        <p data-en="No. 24-1, Wuquan 2nd Rd., Xinzhuang District, New Taipei City (2F)" data-zh="新北市新莊區五權二路二十四號之一 (2樓)"></p>
+        <h3 data-en="Business Enquiries" data-zh="業務詢問"></h3>
+        <p><a href="mailto:sales@kitek.com">sales@kitek.com</a></p>
+        <h3 data-en="Technical Support" data-zh="技術支援"></h3>
+        <p><a href="mailto:engineering@kitek.com">engineering@kitek.com</a></p>
+        <div class="nda-note">
+          <strong data-en="NDA / Confidential Disclosure" data-zh="NDA / 保密協議"></strong><br>
+          <span data-en="Non-disclosure agreements are available upon request. Please contact us to initiate the process."
+                data-zh="如需簽署保密協議（NDA），請來信告知，我們將盡速安排。"></span>
+        </div>
+      </div>
+      <div class="contact-form">
+        <label data-en="Full Name" data-zh="姓名"></label>
+        <input type="text">
+        <label data-en="Company" data-zh="公司名稱"></label>
+        <input type="text">
+        <label data-en="Email" data-zh="電子郵件"></label>
+        <input type="email">
+        <label data-en="Enquiry Type" data-zh="詢問類型"></label>
+        <select>
+          <option data-en="— Select —" data-zh="— 請選擇 —"></option>
+          <option data-en="Product / Technical" data-zh="產品 / 技術諮詢"></option>
+          <option data-en="Business / Partnership" data-zh="業務 / 合作洽談"></option>
+          <option data-en="NDA Request" data-zh="NDA 申請"></option>
+          <option data-en="Supplier Audit" data-zh="供應商稽核"></option>
+          <option data-en="Other" data-zh="其他"></option>
+        </select>
+        <label data-en="Message" data-zh="訊息內容"></label>
+        <textarea></textarea>
+        <button onclick="submitForm()" data-en="Send Message" data-zh="送出訊息"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>© 2026 <span>Kitek Dynamics Co., Ltd.</span> — New Taipei City, Taiwan</div>
+  <div data-en="Active Drive &amp; Precise Control" data-zh="主動驅動 · 精確控制" style="font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:rgba(255,255,255,0.4);"></div>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script>
+const VALVE_IMGS = ["assets/img/valve-1.jpg",
+"assets/img/valve-2.jpg",
+"assets/img/valve-3.jpg"];
+const VALVE_EN   = ["Motor Valve — 2U Model", "Motor Valve — 1U Model (A)", "Motor Valve — 1U Model (B)"];
+const VALVE_ZH   = ["電動閥 — 2U 型號", "電動閥 — 1U 型號 (A)", "電動閥 — 1U 型號 (B)"];
+const PUMP_IMGS  = ["assets/img/pump-1.jpg",
+"assets/img/pump-2.jpg",
+"assets/img/pump-3.jpg",
+"assets/img/pump-4.jpg",
+"assets/img/pump-5.jpg",
+"assets/img/pump-6.jpg"];
+const PUMP_EN    = ["8U Pump — CDU In-Row", "5U Pump — CDU In-Rack", "4U Pump — CDU In-Rack", "1U Pump (A) — Close-Loop", "1U Pump (B) — Close-Loop", "Micro Pump — NB / DT / Robot"];
+const PUMP_ZH    = ["8U 泵浦 — CDU 列式", "5U 泵浦 — CDU 機架式", "4U 泵浦 — CDU 機架式", "1U 泵浦 (A) — 閉迴路", "1U 泵浦 (B) — 閉迴路", "Micro 泵浦 — 筆電/桌機/機器人"];
+const MOTOR_IMGS = ["assets/img/motor-1.jpg",
+"assets/img/motor-2.jpg",
+"assets/img/motor-3.jpg",
+"assets/img/motor-4.jpg",
+"assets/img/motor-5.jpg",
+"assets/img/motor-6.jpg",
+"assets/img/motor-7.jpg",
+"assets/img/motor-8.jpg",
+"assets/img/motor-9.jpg",
+"assets/img/motor-10.jpg",
+"assets/img/motor-11.jpg",
+"assets/img/motor-12.jpg"];
+const MOTOR_EN   = ["BLDC Motor — Gimbal", "BLDC Motor — Drone (Agriculture)", "Lead Screw Motor — Energy Storage", "BLDC Motor — UAV", "BLDC Motor — Screw Conveyor", "BLDC Motor — Headrest", "BLDC Motor — Slide Way", "BLDC Motor — Highly Integrated", "BLDC Motor — Frameless", "Stepper Motor — Automotive / Rotation", "Stepper Motor — DMS / OMS", "Stepper Motor — Automotive HVAC"];
+const MOTOR_ZH   = ["BLDC 馬達 — 雲台", "BLDC 馬達 — 農業無人機", "導螺桿馬達 — 儲能系統", "BLDC 馬達 — 無人機", "BLDC 馬達 — 螺旋輸送", "BLDC 馬達 — 頭枕", "BLDC 馬達 — 滑軌", "BLDC 馬達 — 高整合型", "BLDC 馬達 — 無框型", "步進馬達 — 汽車/旋轉台", "步進馬達 — DMS/OMS", "步進馬達 — 汽車 HVAC"];
+
+let currentLang = 'en';
+const slideshows = {};
+
+function makeSlideshow(containerId, imgs, labelsEn, labelsZh) {
+  const state = { idx: 0, imgs, labelsEn, labelsZh };
+  slideshows[containerId] = state;
+
+  const wrap = document.getElementById(containerId);
+  wrap.innerHTML = `
+    <div class="slide-img-wrap">
+      <img id="${containerId}-img" src="${imgs[0]}" alt="">
+    </div>
+    <div class="slide-label" id="${containerId}-label">${labelsEn[0]}</div>
+    <div class="slide-nav">
+      <button class="slide-btn" id="${containerId}-prev" onclick="slideStep('${containerId}',-1)">&#8592;</button>
+      <span class="slide-counter" id="${containerId}-counter">1 / ${imgs.length}</span>
+      <button class="slide-btn" id="${containerId}-next" onclick="slideStep('${containerId}',1)">&#8594;</button>
+    </div>
+    <div class="slide-dots" id="${containerId}-dots"></div>
+  `;
+
+  const dotsEl = document.getElementById(containerId + '-dots');
+  imgs.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goSlide(containerId, i);
+    dotsEl.appendChild(d);
+  });
+  updateSlideButtons(containerId);
+}
+
+function goSlide(id, idx) {
+  const s = slideshows[id];
+  s.idx = idx;
+  document.getElementById(id + '-img').src = s.imgs[idx];
+  const labels = currentLang === 'zh' ? s.labelsZh : s.labelsEn;
+  document.getElementById(id + '-label').textContent = labels[idx];
+  document.getElementById(id + '-counter').textContent = (idx+1) + ' / ' + s.imgs.length;
+  document.querySelectorAll('#' + id + '-dots .dot').forEach((d,i) => d.classList.toggle('active', i===idx));
+  updateSlideButtons(id);
+}
+
+function slideStep(id, dir) {
+  const s = slideshows[id];
+  const newIdx = Math.max(0, Math.min(s.imgs.length - 1, s.idx + dir));
+  goSlide(id, newIdx);
+}
+
+function updateSlideButtons(id) {
+  const s = slideshows[id];
+  document.getElementById(id+'-prev').disabled = s.idx === 0;
+  document.getElementById(id+'-next').disabled = s.idx === s.imgs.length - 1;
+}
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + id);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+  applyLang();
+  // Update all slideshow labels to current slide
+  Object.keys(slideshows).forEach(id => {
+    const s = slideshows[id];
+    const labels = lang === 'zh' ? s.labelsZh : s.labelsEn;
+    const el = document.getElementById(id + '-label');
+    if (el) el.textContent = labels[s.idx];
+  });
+}
+
+function applyLang() {
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const text = el.getAttribute('data-' + currentLang);
+    if (text !== null) el.innerHTML = text;
+  });
+  document.querySelectorAll('select option').forEach(opt => {
+    const text = opt.getAttribute('data-' + currentLang);
+    if (text) opt.textContent = text;
+  });
+  const navLabels = {
+    en: { home:'Home', about:'About', products:'Products', contact:'Contact' },
+    zh: { home:'首頁', about:'關於我們', products:'產品', contact:'聯絡我們' }
+  };
+  Object.entries(navLabels[currentLang]).forEach(([id, label]) => {
+    const el = document.getElementById('nav-' + id);
+    if (el) el.textContent = label;
+  });
+}
+
+function submitForm() {
+  const msg = currentLang === 'zh'
+    ? '感謝您的來信，我們將盡快回覆。'
+    : 'Thank you for your message. We will be in touch shortly.';
+  alert(msg);
+}
+
+// Init slideshows
+makeSlideshow('ss-valve', VALVE_IMGS, VALVE_EN, VALVE_ZH);
+makeSlideshow('ss-pump',  PUMP_IMGS,  PUMP_EN,  PUMP_ZH);
+makeSlideshow('ss-motor', MOTOR_IMGS, MOTOR_EN, MOTOR_ZH);
+
+// Init nav
+document.getElementById('nav-home').classList.add('active');
+applyLang();
+</script>
 </body>
 </html>
